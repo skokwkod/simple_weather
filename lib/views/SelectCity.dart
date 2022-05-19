@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_weather/data/weather_repository_imp.dart';
 
-import '../Models/cities.dart';
-import '../Models/weather.dart';
+import '../models/cities.dart';
+import '../models/weather.dart';
 
 class SelectCity extends StatefulWidget {
   const SelectCity({Key? key, required this.title}) : super(key: key);
@@ -15,7 +16,7 @@ class SelectCity extends StatefulWidget {
 
 class _SimpleWeatherState extends State<SelectCity> {
   List<Cities>? selectedCity;
-  List<Weather>? selectedCityWeather;
+  Weather? selectedCityWeather;
   bool isReady = false;
 
   @override
@@ -46,12 +47,14 @@ class _SimpleWeatherState extends State<SelectCity> {
 
   fillDataCityWeather(num cityId) async {
     print("fillDataCityWeather cityId: "+cityId.toString());
-    selectedCityWeather = await Weather.fetchWeather(cityId);
+    var selectedCityWeather2 = (await WeatherRepositoryImp().fetchWeather(cityId));
+    selectedCityWeather = selectedCityWeather2 as Weather?;
+   // selectedCityWeather = await Weather.fetchWeather(cityId);
     setState(() {
       isReady = true;
     });
 
-    print(selectedCityWeather?[0].mainWeather);
+    print(selectedCityWeather?.mainWeather);
   }
 
   @override

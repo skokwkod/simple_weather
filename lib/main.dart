@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const StartView(),
+      home: const SelectCity(title: "Wybierz Miasto"),
     );
   }
 }
